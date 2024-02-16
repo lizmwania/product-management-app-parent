@@ -1,0 +1,28 @@
+spring:
+  application:
+    name: product-service
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/productmanagement
+    username: postgres
+    password: postgres
+  jpa:
+    properties:
+      hibernate:
+        entitymanager:
+          factory_name: jakarta.persistence.EntityManagerFactory
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    database: postgresql
+    dialect: org.hibernate.dialect.PostgreSQLDialect
+
+#spring.datasource.url= jdbc:postgresql://localhost:5432/productmanagement
+#spring.datasource.username= postgres
+#spring.datasource.password= postgres
+#
+#spring.jpa.properties.hibernate.jdbc.lob.non_contextual_creation= true
+#spring.jpa.properties.hibernate.dialect= org.hibernate.dialect.PostgreSQLDialect
+#
+## Hibernate ddl auto (create, create-drop, validate, update)
+#spring.jpa.hibernate.ddl-auto= update
