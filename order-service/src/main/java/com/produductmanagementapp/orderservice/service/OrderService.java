@@ -1,5 +1,6 @@
 package com.produductmanagementapp.orderservice.service;
 
+import com.produductmanagementapp.orderservice.dto.InventoryResponse;
 import com.produductmanagementapp.orderservice.dto.OrderLineItemsDto;
 import com.produductmanagementapp.orderservice.dto.OrderRequest;
 import com.produductmanagementapp.orderservice.model.Order;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
@@ -30,12 +32,20 @@ public class OrderService {
         }
         Order order = new Order();
         order.setOrderNumber(UUID.randomUUID().toString());
+
+        List<String> skuCodes = order.getOrderLineItemsList().stream()
+                .map(OrderLineItems::getSkuCode)
+                .toList();
         //webclient to call inventory service
-        Boolean result = webClient.get()
-                .uri("http://localhost:8082/api/inventory")
-                .retrieve().bodyToMono(Boolean.class)
+        InventoryResponse[] inventoryResponseArray = webClient.get()
+                .uri("http://localhost:8082/api/inventory",
+                        uriBuilder -> uriBuilder.queryParam("skuCode", skuCodes).build())
+                .retrieve()
+                .bodyToMono(InventoryResponse[].class)
                 .block();
-        if(result){
+
+        boolean allProductsInStock = Arrays.stream(inventoryResponseArray).allMatch(InventoryResponse::isInStock);
+        if(allProductsInStock){
             orderRepository.save(order);
         }else {
             throw new IllegalArgumentException("Product Not Found. Please try again later");
