@@ -1,12 +1,11 @@
 package com.produductmanagementapp.inventoryservice.service;
 
-import com.produductmanagementapp.inventoryservice.dto.InventoryResponse;
 import com.produductmanagementapp.inventoryservice.repository.InventoryRepository;
+import com.produductmanagementapp.inventoryservice.dto.InventoryResponse;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.beans.Transient;
 import java.util.List;
 
 @Service

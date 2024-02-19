@@ -1,9 +1,8 @@
 package com.produductmanagementapp.inventoryservice.controller;
 
-import com.produductmanagementapp.inventoryservice.dto.InventoryResponse;
 import com.produductmanagementapp.inventoryservice.service.InventoryService;
+import com.produductmanagementapp.inventoryservice.dto.InventoryResponse;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

@@ -16,7 +16,10 @@ spring:
     show-sql: true
     database: postgresql
     dialect: org.hibernate.dialect.PostgreSQLDialect
-
+eureka:
+  client:
+    serviceUrl:
+      defaultZone=http://localhost:8761/eureka
 #spring.datasource.url= jdbc:postgresql://localhost:5432/productmanagement
 #spring.datasource.username= postgres
 #spring.datasource.password= postgres
